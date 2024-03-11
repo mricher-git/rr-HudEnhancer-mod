@@ -1,0 +1,10 @@
+{
+	"Id": "HudEnhancer",
+	"Version": "0.2.0",
+	"DisplayName": "HUD Enhancer",
+	"Author": "Vanguard",
+	"EntryMethod": "HudEnhancer.UMM.Loader.Load",
+	"ManagerVersion": "0.27.11",
+	"HomePage": "https://www.nexusmods.com/railroader/mods/XXX",
+	"Repository": "https://github.com/mricher-git/rr-hudenhancer-mod/blob/main/repository.json"
+}
