@@ -1,14 +1,15 @@
 using GalaSoft.MvvmLight.Messaging;
 using Game.Events;
 using Game.State;
+using HarmonyLib;
 using HudEnhancer.UMM;
+using Model;
 using System;
+using System.Linq;
 using UI;
-using UI.Builder;
 using UI.CarInspector;
 using UI.Common;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace HudEnhancer;
 
@@ -80,5 +81,31 @@ public class HudEnhancer : MonoBehaviour
 	public void OnSettingsChanged()
 	{
 		if (MapState != MapStates.MAPLOADED) return;
+	}
+}
+
+[HarmonyPatch(typeof(CarInspector), nameof(CarInspector.SelectConsist))]
+ static class SelectConsistPatch
+{
+	public static bool Prefix(Car ____car, Window ____window)
+	{
+		if (GameInput.IsControlDown)
+		{
+			if (!____car.IsLocomotive)
+			{
+				var car = ____car.EnumerateCoupled(Car.LogicalEnd.A).First();
+				if (car != null && car.IsLocomotive)
+				{
+					TrainController.Shared.SelectedCar = car;
+
+					if (GameInput.IsShiftDown)
+					{
+						____window.CloseWindow();
+					}
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 }
