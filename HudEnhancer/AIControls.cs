@@ -210,14 +210,14 @@ namespace HudEnhancer
 				{
 					RectTransform control = builder.ButtonStrip(builder4 =>
 					{
-						builder4.AddButton("X", () => SetOrdersValue(null, null, null, 0.0f));
+						builder4.AddButton("<size=16>Stop</size>", () => SetOrdersValue(null, null, null, 0.0f));
 						//builder4.AddButton("\u00BD", () => SetOrdersValue(null, null, null, 6.1f));
-						builder4.AddButton("1", () => SetOrdersValue(null, null, null, 12.2f));
-						builder4.AddButton("2", () => SetOrdersValue(null, null, null, 24.4f));
-						builder4.AddButton("5", () => SetOrdersValue(null, null, null, 61f));
-						builder4.AddButton("10", () => SetOrdersValue(null, null, null, 122f));
-						builder4.AddButton("20", () => SetOrdersValue(null, null, null, 244f));
-						builder4.AddButton("1k", () => SetOrdersValue(null, null, null, 12200f));
+						builder4.AddButton("<size=16>1</size>", () => SetOrdersValue(null, null, null, 12.2f));
+						builder4.AddButton("<size=16>2</size>", () => SetOrdersValue(null, null, null, 24.4f));
+						builder4.AddButton("<size=16>5</size>", () => SetOrdersValue(null, null, null, 61f));
+						builder4.AddButton("<size=16>10</size>", () => SetOrdersValue(null, null, null, 122f));
+						builder4.AddButton("<size=16>20</size>", () => SetOrdersValue(null, null, null, 244f));
+						builder4.AddButton("<size=16>1k</size>", () => SetOrdersValue(null, null, null, 12200f));
 					}, 4);
 					builder.AddField("Car Lengths", control);
 				}
