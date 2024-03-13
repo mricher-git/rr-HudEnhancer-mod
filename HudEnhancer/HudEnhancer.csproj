@@ -24,6 +24,7 @@
 	<ItemGroup>
 		<Reference Include="UnityEngine" />
 		<Reference Include="UnityEngine.CoreModule" />
+		<Reference Include="UnityEngine.InputLegacyModule" />
 		<Reference Include="UnityEngine.TextRenderingModule" />
 		<Reference Include="UnityEngine.UI" />
 		<Reference Include="Unity.TextMeshPro" />
