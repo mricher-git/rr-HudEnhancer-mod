@@ -149,9 +149,24 @@ namespace HudEnhancer.Patches
 	{
 		public static BaseLocomotive? FindLeadLoco(this Car car)
 		{
-			var loco = car.EnumerateCoupled(Car.LogicalEnd.A).First() as BaseLocomotive;
-			if (loco == null)
-				loco = car.EnumerateCoupled(Car.LogicalEnd.B).First() as BaseLocomotive;
+			var coupled = car.EnumerateCoupled(Car.LogicalEnd.A);
+			var loco = coupled.First();
+			if (loco == null || !loco.IsLocomotive && loco.Archetype != Model.Definition.CarArchetype.Tender)
+			{
+				coupled = car.EnumerateCoupled(Car.LogicalEnd.B);
+				loco = coupled.First();
+			}
+			if (loco != null)
+			{
+				if (loco.Archetype == Model.Definition.CarArchetype.Tender)
+				{
+					loco = coupled.ElementAt(1);
+				}
+			}
+
+			return loco ? loco as BaseLocomotive : null;
+		}
+	}
 
 			return loco;
 		}
