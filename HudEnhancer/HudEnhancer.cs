@@ -6,8 +6,11 @@ using HudEnhancer.UMM;
 using Model;
 using RollingStock;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using UI;
+using UI.Builder;
 using UI.CarInspector;
 using UI.Common;
 using UnityEngine;
@@ -168,7 +171,26 @@ namespace HudEnhancer.Patches
 		}
 	}
 
-			return loco;
+	[HarmonyPatch(typeof(CarInspector), nameof(CarInspector.PopulateCarPanel))]
+	public static class PopulateCarPanelPatch
+	{
+		static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		{
+			var codeMatcher = new CodeMatcher(instructions)
+				.MatchEndForward(
+				new CodeMatch(OpCodes.Ldloc_0),
+				new CodeMatch(OpCodes.Ldc_I4_0),
+				new CodeMatch(OpCodes.Stfld))
+				.ThrowIfNotMatch("Could not find updatefrequency")
+				.InsertAndAdvance(new CodeInstruction(OpCodes.Ldarg_1))//, builder))
+				.InsertAndAdvance(new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(PopulateCarPanelPatch), nameof(PopulateCarPanelPatch.AddVelocity))));
+			return codeMatcher.InstructionEnumeration();
+		}
+
+		public static void AddVelocity(UIPanelBuilder builder)
+		{
+			var _car = CarInspector._instance._car;
+			builder.AddField("Speed", () => string.Format("{0:0.0}", Mathf.Abs(_car.velocity * 2.236936f)), UIPanelBuilder.Frequency.Fast).Tooltip("Speed", "Current speed of this car in MPH.");
 		}
 	}
 }
