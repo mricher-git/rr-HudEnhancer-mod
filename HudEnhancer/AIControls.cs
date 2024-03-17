@@ -208,6 +208,10 @@ namespace HudEnhancer
 
 				if (mode == AutoEngineerMode.Yard)
 				{
+					int num = MaxSpeedMphForMode(mode);
+					RectTransform yardSpeedSlider = builder.AddSlider(() => persistence.Orders.MaxSpeedMph / 5, () => persistence.Orders.MaxSpeedMph.ToString(), value => SetOrdersValue(null, null, (int)(value * 5.0), null), maxValue: num / 5f, wholeNumbers: true);
+					builder.AddField("Yard Speed", yardSpeedSlider);
+
 					RectTransform control = builder.ButtonStrip(builder4 =>
 					{
 						builder4.AddButton("<size=16>Stop</size>", () => SetOrdersValue(null, null, null, 0.0f));
