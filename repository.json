@@ -2,6 +2,11 @@
 	"Releases": [
 		{
 			"Id": "HudEnhancer",
+			"Version": "0.4.0",
+			"DownloadUrl": "https://github.com/mricher-git/rr-HudEnhancer-mod/releases/download/v0.4.0/HudEnhancer_v0.4.0.zip"
+		},
+		{
+			"Id": "HudEnhancer",
 			"Version": "0.3.1",
 			"DownloadUrl": "https://github.com/mricher-git/rr-HudEnhancer-mod/releases/download/v0.3.1/HudEnhancer.zip"
 		},
