@@ -273,7 +273,7 @@ namespace HudEnhancer
 			float? distance)
 		{
 			Orders orders = persistence.Orders;
-			if (!orders.Enabled && mode.HasValue && mode.Value != AutoEngineerMode.Off && !maxSpeedMph.HasValue)
+			if (mode.HasValue && mode.Value != AutoEngineerMode.Off && !maxSpeedMph.HasValue)
 			{
 				float f = _car.velocity * 2.23694f;
 				float num = Mathf.Abs(f);
