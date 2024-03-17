@@ -284,10 +284,15 @@ namespace HudEnhancer
 				maxSpeedMph = (double)f > 0.10000000149011612 ? Mathf.CeilToInt(num / 5f) * 5 : 0;
 				forward = (double)f >= -0.10000000149011612;
 			}
-			AutoEngineerMode? nullable = mode;
-			AutoEngineerMode autoEngineerMode = AutoEngineerMode.Yard;
-			if (nullable.GetValueOrDefault() == autoEngineerMode & nullable.HasValue)
-				maxSpeedMph = MaxSpeedMphForMode(AutoEngineerMode.Yard);
+
+			if (mode != null && mode == AutoEngineerMode.Yard)
+			{
+				if (orders.MaxSpeedMph > 0)
+					maxSpeedMph = orders.MaxSpeedMph;
+				else
+					maxSpeedMph = MaxSpeedMphForMode(AutoEngineerMode.Yard);
+			}
+
 			AutoEngineerMode mode1 = mode ?? Mode();
 			int maxSpeedMphMin = Mathf.Min(maxSpeedMph ?? orders.MaxSpeedMph, MaxSpeedMphForMode(mode1));
 			SendAutoEngineerCommand(mode1, forward ?? orders.Forward, maxSpeedMphMin, distance);
