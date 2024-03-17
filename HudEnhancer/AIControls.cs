@@ -247,7 +247,7 @@ namespace HudEnhancer
 				case AutoEngineerMode.Road:
 					return 45;
 				case AutoEngineerMode.Yard:
-					return 15;
+					return 25;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
 			}
@@ -290,7 +290,7 @@ namespace HudEnhancer
 				if (orders.MaxSpeedMph > 0)
 					maxSpeedMph = orders.MaxSpeedMph;
 				else
-					maxSpeedMph = MaxSpeedMphForMode(AutoEngineerMode.Yard);
+					maxSpeedMph = HudEnhancer.Instance?.Settings.DefaultYardSpeed ?? MaxSpeedMphForMode(AutoEngineerMode.Yard);
 			}
 
 			AutoEngineerMode mode1 = mode ?? Mode();

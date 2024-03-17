@@ -74,6 +74,9 @@ public static class Loader
 
 	public class HudEnhancerSettings : UnityModManager.ModSettings, IDrawable
 	{
+		[Draw(Type = DrawType.Slider, Min = 1, Max = 25)]
+		public int DefaultYardSpeed = 15;
+
 		public override void Save(UnityModManager.ModEntry modEntry)
 		{
 			Save(this, modEntry);
